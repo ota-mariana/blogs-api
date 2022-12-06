@@ -18,17 +18,17 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
-          key: 'id'
+          key: 'id',
         },
-        allowNull: true,
+        allowNull: false,
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
       published: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       },
       updated: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       }
     });
   },
