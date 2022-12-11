@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING(255),
     content: DataTypes.STRING(255),
     userId: DataTypes.INTEGER,
-    published: DataTypes.DATETIME,
-    updated: DataTypes.DATETIME
+    published: DataTypes.DATE,
+    updated: DataTypes.DATE
   }, {
     sequelize,
     // modelName: 'blog_posts',
