@@ -33,8 +33,24 @@ const getUserById = async (req, res) => {
   return res.status(200).json(userById);
 };
 
+const addNewUser = async (req, res) => {
+  const user = req.body;
+  const { type, message, token } = await userService.addNewUser(user);
+  console.log(`log da newUser ${message}`);
+
+  if (type === 'USER_EXIST') {
+    return res.status(409).json({ message });
+  }
+  // const { password: _password, ...dataWithoutPassword } = newUser.dataValues;
+  // const token = createToken(dataWithoutPassword);
+  // console.log(`log da token ${token}`);
+
+  return res.status(201).json({ token });
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   getUserByLogin,
+  addNewUser,
 };

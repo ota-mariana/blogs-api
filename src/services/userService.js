@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { createToken } = require('../auth/validateJwt');
 
 const getUserByLogin = async (email, password) => {
   const userLogin = await User.findOne({ where: { email, password } });
@@ -15,8 +16,22 @@ const getUserById = async (id) => {
   return userById;
 };
 
+const addNewUser = async ({ displayName, email, password, image }) => {
+  const newUser = await User.create({ displayName, email, password, image });
+  const userExist = await User.findOne({ where: { email } });
+
+  const { password: _password, ...dataWithoutPassword } = newUser.dataValues;
+  const token = createToken(dataWithoutPassword);
+
+  if (!userExist) {
+    return { type: null, token };
+  }
+  return { type: 'USER_EXIST', message: 'User already registered' };
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   getUserByLogin,
+  addNewUser,
 };
