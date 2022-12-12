@@ -41,9 +41,6 @@ const addNewUser = async (req, res) => {
   if (type === 'USER_EXIST') {
     return res.status(409).json({ message });
   }
-  // const { password: _password, ...dataWithoutPassword } = newUser.dataValues;
-  // const token = createToken(dataWithoutPassword);
-  // console.log(`log da token ${token}`);
 
   return res.status(201).json({ token });
 };

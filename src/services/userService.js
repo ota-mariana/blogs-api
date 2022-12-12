@@ -17,16 +17,19 @@ const getUserById = async (id) => {
 };
 
 const addNewUser = async ({ displayName, email, password, image }) => {
-  const newUser = await User.create({ displayName, email, password, image });
   const userExist = await User.findOne({ where: { email } });
 
+  if (userExist) {
+    return { type: 'USER_EXIST', message: 'User already registered' };
+  }
+  
+  const newUser = await User.create({ displayName, email, password, image });
   const { password: _password, ...dataWithoutPassword } = newUser.dataValues;
   const token = createToken(dataWithoutPassword);
 
   if (!userExist) {
-    return { type: null, token };
+    return { token };
   }
-  return { type: 'USER_EXIST', message: 'User already registered' };
 };
 
 module.exports = {

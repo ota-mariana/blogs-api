@@ -29,7 +29,7 @@ const validateDataUser = (req, res, next) => {
     .json({ message: '"email" must be a valid email' });
   }
 
-  if (password.legth < 6) {
+  if (password.length < 6) {
     return res.status(400)
     .json({ message: '"password" length must be at least 6 characters long' });
   }
