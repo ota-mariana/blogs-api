@@ -1,6 +1,6 @@
 const jwtValidation = require('../auth/validateJwt');
 
-const validateUserToken = (req, res, next) => {
+const validateToken = (req, res, next) => {
   const { authorization: token } = req.headers;
   const { type, message } = jwtValidation.verifyToken(token);
 
@@ -38,6 +38,6 @@ const validateDataUser = (req, res, next) => {
 };
 
 module.exports = {
-  validateUserToken,
+  validateToken,
   validateDataUser,
 };
